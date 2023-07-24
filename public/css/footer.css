@@ -1,0 +1,14 @@
+.sk-footer {
+    background-color: #282634;
+    /*background-color: #282634;*/
+    color: white;
+    height: 2.5rem;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    padding-right: 1%;
+}
+
+.socials{
+    margin-top: 0.3%;
+}

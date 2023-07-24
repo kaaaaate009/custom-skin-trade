@@ -1,0 +1,151 @@
+<%- include('../partials/header.ejs')%>
+<div class="bg-img">
+  <div class="container-fluid ">
+    <div class="row index-content">
+      <div class="col-2"></div>
+      <div class="col-8 index-left">
+        <section class="product-section skin-pad">
+          <h2 class="text-center">Welcome <b> <%=user.firstName%> </b></h2>
+          <%if(trade_items.length){%>
+          <h5 class="text-center">Trades you created</h5>
+          <%trade_items.forEach(skndata=>{
+            var temp = 0; 
+            var id = "";
+            if(currentTradingData){
+                currentTradingData.forEach(e => { 
+
+                    if(JSON.stringify(e.trade_item._id) === JSON.stringify(skndata._id) || JSON.stringify(e.trade_with._id) === JSON.stringify(skndata._id)){
+                        if(e.status != 2){
+                            temp = 1;
+                            id = e._id;
+                        }
+                    }
+
+                });
+            }
+            var status = "AVAILABLE";
+            if(skndata.status == 2) status = "Offer Pending";
+            else if(skndata.status == 3) status = "Offer accepted";
+                            
+          %>
+          <div class="container py-1">
+            <div class="card shadow-0 border rounded-3">
+              <div class="card-body product-card">
+                <div class="row">
+                  <div class="col-lg-9">
+                    <h5><a href="/trade/<%=skndata._id%>"><%= skndata.item_name %></a></h5>
+                    <p><%= skndata.item_details %></p>
+                  </div>
+                  <div class="col-lg-3  border-sm-start-none border-start float">
+                    <div class="d-flex flex-row align-items-center mb-1 ">
+                    </div>
+                    <div class="d-flex flex-column mt-4">
+                      <a href="/trade/<%=skndata._id%>" class="btn btn-primary btn-sm">View Skin</a>
+                      <% if(temp == 1){
+                        %>
+                      <form>
+                        <button type="submit" class="btn btn-info" formmethod="GET" formaction="/users/offer/<%= id %>">Manage Offer</button>
+                      </form>
+                      <%
+                    } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%});
+                } else {%>
+          <h5 class="text-center">You have not created any trades</h5>
+          <%}%>
+          </section>
+
+          <section class="product-section skin-pad">
+            <h2 class="text-center"><b>Watch List</b></h2>
+            <%if(watchListData.length){%>
+          <h5 class="text-center">#</h5>
+          <%watchListData.forEach(tradeD=>{ 
+            var status = "AVAILABLE";
+            %>
+          <div class="container py-1">
+            <div class="card shadow-0 border rounded-3">
+              <div class="card-body product-card">
+                <div class="row">
+                  <div class="col-lg-9">
+                    <h5><a href="/trade/<%=tradeD.trade_item_id._id%>"><%=tradeD.trade_item_id.item_name %></a></h5>
+                    <!-- <p><%= tradeD.trade_item_id.item_name %></p> -->
+                    <% if(tradeD.trade_item_id.status == 2){
+                      status = "NOT AVAILABLE";
+                    }else if (tradeD.trade_item_id.status == 3){
+                      status = "PRODUCT TRADED";
+                    }else{ %>
+                    <p>Trade Avaialability : <%= status%></p>
+                    <% } %>
+                  </div>
+                  <div class="col-lg-3  border-sm-start-none border-start float">
+                    <div class="d-flex flex-row align-items-center mb-1 ">
+                    </div>
+                    <div class="d-flex flex-column mt-4">
+                      <form>
+                        <button type="submit" formaction="/trade/<%= tradeD._id %>/unwatch" formmethod="POST" class="btn btn-primary btn-sm" style="margin-top: 15px;">Unwatch</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%});
+                  } else {%>
+          <h5 class="text-center">You have not watchlisted any items</h5>
+          <%}%>
+            </section>
+
+            <section class="product-section skin-pad">
+              <h2 class="text-center"><b>Your Trade Offers</b></h2>
+              <%if(currentTradingData.length){%>
+          <h5 class="text-center">#</h5>
+          <% currentTradingData.forEach(skndata => { 
+                  var hide = 0;
+                  if(skndata.creater_user_id == id){
+                      var status = "OFFER PENDING";
+                  if(skndata.status == 2){
+                      status = "OFFER ACCEPTED";
+                      hide = 1;
+                  }
+                  else if(skndata.status == 3) status = "OFFER REJECTED"; 
+                  %>
+          <div class="container py-1">
+            <div class="card shadow-0 border rounded-3">
+              <div class="card-body product-card">
+                <div class="row">
+                  <div class="col-lg-9">
+                    <h5><%=skndata.trade_with.item_name %></a></h5>
+                    <p><%= status%></p>
+                  </div>
+                  <div class="col-lg-3  border-sm-start-none border-start float">
+                    <div class="d-flex flex-row align-items-center mb-1 ">
+                    </div>
+                    <div class="d-flex flex-column mt-4">
+                      <% if(hide != 1){%>
+                      <form>
+                        <button type="submit" formaction="/users/<%= skndata._id %>/?_method=DELETE" formmethod="POST" class="btn btn-primary btn-sm" style="margin-top: 15px;">Cancel Offer</button>
+                      </form>
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%  } })%>
+          <% }else{ %>
+          <h5 class="text-center">You do not have any trade offers.</h5>
+          <%}%>
+              </section>
+
+        </div>
+</div>
+</div>
+</div>
+    <%- include('../partials/footer.ejs')%>

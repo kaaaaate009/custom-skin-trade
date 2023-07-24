@@ -1,0 +1,15 @@
+html * {
+    font-family: "Roboto", Sans-Serif;
+}
+
+.bg-img {
+    background-image: url("/images/skins/csgo/blur_ak47_skin.png");
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    max-height: auto;
+}
+
+textarea {
+    resize: none;
+}

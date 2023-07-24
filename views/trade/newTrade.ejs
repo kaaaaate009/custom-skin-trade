@@ -1,0 +1,63 @@
+<%- include('../partials/header.ejs')%>
+
+<form class="trade-form" action="/trade" method='POST'>
+  <div class="row mb-5"></div>
+  <div class="row mb-3">
+    <label for="traderName" class="col-sm-3 col-form-label">Enter Trader Name</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="traderName" name='created_by' placeholder="Input the traders name" required>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="skinCategory" class="col-sm-3 col-form-label">Enter Item Category</label>
+    <div class="col-sm-4">
+      <select class="form-select" name="item_category">
+        <option selected value="csgo">CS GO</option>
+        <option value="valorant">Valorant</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="skinName" class="col-sm-3 col-form-label">Enter Skin Name</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="skinName" name='item_name' placeholder="Input the skin name" required>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="skinName" class="col-sm-3 col-form-label">Enter Skin Details</label>
+    <div class="col-sm-4">
+      <textarea class="form-control" rows="3" id="itemDetails" name='item_details' placeholder="Input the guns skin details" required minlength="10"></textarea>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="itemImage" class="col-sm-3 col-form-label">Ente Skin Image Path</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="itemImage" name='image' placeholder="Input the skin image path" required>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="skinDiscPrice" class="col-sm-3 col-form-label">Enter Skin Discounted Price</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="skinDiscPrice" name='disc_price' placeholder="Input the skin discounted price" required>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="skinOrgPrice" class="col-sm-3 col-form-label">Enter Skin Original Price</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="skinOrgPrice" name='org_price' placeholder="Input the skin original price" required>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-sm-7 text-center">
+      <button type="submit" class="btn btn-primary ">Add Trade</button>
+    </div>
+  </div>
+
+</form>
+
+
+<%- include('../partials/footer.ejs')%>

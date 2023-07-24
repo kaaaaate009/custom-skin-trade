@@ -1,0 +1,74 @@
+<%- include('../partials/header.ejs')%>
+
+
+<div class="row index-content">
+  <div class="col-8 index-left">
+    <section class="product-section skin-pad">
+      <div class="container py-1">
+        <div class="row justify-content-center mb-3">
+          <div class="col-12">
+            <div class="card shadow-0 border rounded-3">
+              <div class="card-body product-card">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <img src="<%= sknData.image%>" class="w-100" alt="">
+                  </div>
+                  <div class="col-lg-9">
+                    <h5><%= sknData.item_name %></h5>
+                    <p><%= sknData.item_details %></p>
+                    <p>Created By: <%= sknData.created_by.firstName %> <%= sknData.created_by.lastName %></p>
+                  </div>
+                  <div class="col-lg-2  border-sm-start-none border-start float">
+                    <div class="d-flex flex-row align-items-center mb-1 ">
+                      <h4 class="mb-1 me-1"><%= sknData.disc_price %></h4>
+                      <span class="text-danger"><s><%= sknData.org_price %></s></span>
+                    </div>
+
+                    <div class="d-flex flex-column mt-4">
+                      <% if(user == sknData.created_by._id) { %>
+                      <form>
+                        <button type="submit" formmethod="GET" formaction="/trade/<%= sknData._id%>/edit" class="btn btn-primary btn-sm">Edit Details</button>
+
+                        <button type="submit" formaction="/trade/<%= sknData._id%>/?_method=DELETE" formmethod="POST" class="btn btn-primary btn-sm" style="margin-top: 15px;">Delete Skin</button>
+                      </form>
+                      <% } else {
+                        var hidden = 0;
+                        if(sknData.status != 1){
+                            hidden = 1;
+                        }
+                      %>
+
+                      <% if(watchListData != null && user != null){ %>
+                      <form>
+                        <button type="submit" formaction="/trade/<%= watchListData._id%>/unwatch" formmethod="POST" class="btn btn-primary btn-sm" style="margin-top: 15px;">Unwatch</button>
+                        <br><br>
+                      </form>
+                      <% } else  { %>
+                      <form>
+                        <button type="submit" formaction="/trade/<%= sknData._id%>/watch" formmethod="POST" class="btn btn-primary btn-sm" style="margin-top: 15px;">Watch</button>
+                      </form>
+                      <br><br>
+                      <%} %>
+                      <%if(hidden == 0){ %>
+                      <form>
+                        <input type="text" value="<%= sknData.created_by %>" name="accepter_user_id">
+                        <button type="submit" class="btn btn-primary btn-sm" formmethod="POST" formaction="/users/trade/<%=sknData._id %>">Trade</button>
+                      </form>
+                      <% } %>
+                      <%} %>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class=" col-4 index-right">
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs')%>

@@ -1,0 +1,59 @@
+.sk-header {
+    background-color: #282634;
+    /*background-color: #282634;*/
+    height: 7vw;
+    color: white;
+}
+
+.sk-navbar {
+    background-color: #322f40;
+    height: 30px;
+    color: white;
+}
+
+.sk-navbar a,
+a:hover,
+a:focus,
+a:active {
+    color: white;
+    cursor: pointer;
+    padding-left: 5%;
+}
+
+.main-heading img {
+    color: white;
+    width: 85%;
+    height: 15%;
+}
+
+.main-title img {
+    padding-left: 10%;
+    padding-bottom: 1%;
+    width: 35%;
+    height: 15%;
+}
+
+.main-title a,
+a:hover,
+a:focus,
+a:active {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.success {
+    background: #696393;
+    color: #fff;
+    width: 20%;
+    text-align: center;
+    padding: 10px 10px;
+}
+
+.error {
+    background: #696393;
+    color: #fff;
+    width: 20%;
+    text-align: center;
+    padding: 10px 10px;
+}

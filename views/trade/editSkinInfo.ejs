@@ -1,0 +1,48 @@
+<%- include('../partials/header.ejs')%>
+
+
+<form class="trade-form" method="POST" action="/trade/<%= trade_items._id%>?_method=PUT">
+  <div class="row mb-5"></div>
+
+  <div class="row mb-3">
+    <label for="skinName" class="col-sm-3 col-form-label">Enter Skin Name</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="skinName" name='item_name' placeholder="Input the guns skin name" value="<%= trade_items.item_name%>" required>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="itemDetails" class="col-sm-3 col-form-label">Enter Skins Details</label>
+    <div class="col-sm-4">
+      <textarea class="form-control" rows="5" id="itemDetails" name='item_details' placeholder="Input the guns skin details" required minlength="10"><%= trade_items.item_details%></textarea>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="itemImage" class="col-sm-3 col-form-label">Ente Skin Image Path</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="itemImage" name='image' placeholder="Input skin image path" value="<%= trade_items.image%>" required>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="skinDiscPrice" class="col-sm-3 col-form-label">Enter Skin Discounted Price</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="skinDiscPrice" name='disc_price' placeholder="Input the guns skin discounted price" value="<%= trade_items.disc_price%>" required>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="skinOrgPrice" class="col-sm-3 col-form-label">Enter Skin Original Price</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="skinOrgPrice" name='org_price' placeholder="Input the skins original price" value="<%= trade_items.org_price%>" required>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-sm-7 text-center">
+      <button type="submit" class="btn btn-primary ">Update Details</button>
+    </div>
+  </div>
+
+</form>
+
+<%- include('../partials/footer.ejs')%>

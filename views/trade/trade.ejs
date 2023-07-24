@@ -1,0 +1,92 @@
+<%- include('../partials/header.ejs')%>
+<div class="bg-img">
+  <div class="container-fluid ">
+    <div class="row index-content">
+      <div class="col-2">
+      </div>
+      <div class="col-8 index-left">
+        <section class="product-section skin-pad">
+          <h3 class="text-center">CS GO Skins</h3>
+          <%  if(trade_items.length){ trade_items.forEach(trade_items => {
+                if(trade_items.item_category === 'csgo'){
+            %>
+          <div class="container py-1">
+            <div class="row justify-content-center mb-3">
+              <div class="col-12">
+                <div class="card shadow-0 border rounded-3">
+                  <div class="card-body product-card">
+                    <div class="row">
+                      <div class="col-lg-12">
+                      </div>
+                      <div class="col-lg-9">
+                        <h5><a href="/trade/<%=trade_items._id%>"><%= trade_items.item_name %></a></h5>
+                        <p><%= trade_items.item_details %></p>
+                      </div>
+                      <div class="col-lg-3  border-sm-start-none border-start float">
+                        <div class="d-flex flex-row align-items-center mb-1 ">
+                        </div>
+                        <div class="d-flex flex-column mt-4">
+                          <a href="/trade/<%=trade_items._id%>" class="btn btn-primary btn-sm">View Skin</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } }); } else {%>
+          <p class="text-center">There are no skins to display.</p><br>
+          <%}%>
+        </section>
+      </div>
+      <div class="col-2 index-right">
+      </div>
+    </div>
+
+    <div class="row index-content">
+      <div class="col-2 ">
+      </div>
+      <div class="col-8 index-left">
+        <section class="product-section skin-pad">
+          <h3 class="text-center">Valorant Skins</h3>
+            <%  if(trade_items.length){ 
+              trade_items.forEach(trade_items => {
+                if(trade_items.item_category === 'valorant'){
+                %>
+          <div class="container py-1">
+            <div class="row justify-content-center mb-3">
+              <div class="col-12">
+                <div class="card shadow-0 border rounded-3">
+                  <div class="card-body product-card">
+                    <div class="row">
+                      <div class="col-lg-12">
+                      </div>
+                      <div class="col-lg-9">
+                        <h5><a href="/trade/<%=trade_items._id%>"><%= trade_items.item_name %></a></h5>
+                        <p><%= trade_items.item_details %></p>
+                      </div>
+                      <div class="col-lg-3  border-sm-start-none border-start float">
+                        <div class="d-flex flex-row align-items-center mb-1 ">
+                        </div>
+                        <div class="d-flex flex-column mt-4">
+                          <a href="/trade/<%=trade_items._id%>" class="btn btn-primary btn-sm">View Skin</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } }); } else {%>
+          <p class="text-center">There are no skins to display.</p><br>
+          <%}%>
+        </section>
+      </div>
+      <div class="col-2 index-right">
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer.ejs')%>

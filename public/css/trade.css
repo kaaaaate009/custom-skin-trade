@@ -1,0 +1,32 @@
+.index-left {
+    padding: 5%;
+    color: rgb(255, 255, 255);
+}
+
+.index-right {
+    padding: 5%;
+    color: white;
+}
+
+.product-section {
+    background-color: rgb(85, 83, 122);
+}
+
+.product-card {
+    color: white;
+    background-color: rgb(42, 41, 63);
+    max-height: 50%;
+}
+
+.list-details {
+    padding-left: 65%;
+}
+
+.list-details a,
+a:hover,
+a:focus,
+a:active{
+    color: rgb(221, 212, 212);
+    text-decoration: none;
+    cursor: pointer;
+}
