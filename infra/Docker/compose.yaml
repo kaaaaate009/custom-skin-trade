@@ -1,0 +1,9 @@
+version: 0.0.1
+
+services:
+  server:
+    build:
+      context: ../..
+      dockerfile: infra/Docker/Dockerfile
+    ports:
+      - 3000:3000

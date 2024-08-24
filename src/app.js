@@ -7,8 +7,8 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
-const tradeRoutes = require('./routes/tradeRoutes');
-const mainRoutes = require('./routes/mainRoutes');
+const tradeRoutes = require('../routes/tradeRoutes');
+const mainRoutes = require('../routes/mainRoutes');
 
 
 //create app
