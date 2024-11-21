@@ -21,7 +21,7 @@ A dynamic Custom Game Skins Trading Platform built with Node.js backend and Expr
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/kaaaaate009/custom-skin-trade.git`
+1. Clone the repository: `git clone https://github.com/swarajdhondge/custom-skin-trade.git`
 2. Navigate to the project directory: `cd custom-skin-trade`
 3. Install dependencies: `npm i`
 4. Start the server: `nodemon app`
