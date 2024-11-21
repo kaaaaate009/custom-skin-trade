@@ -52,4 +52,4 @@ This project is licensed under the [Apache-2.0 License](LICENSE).
 
 For any inquiries or suggestions, feel free to reach out to [SwarajDhondge](mailto:swarajdhondge@gmail.com).
 
-Project Link: [https://github.com/kaaaaate009/custom-skin-trade](https://github.com/kaaaaate009/custom-skin-trade)
+Project Link: [https://github.com/kaaaaate009/custom-skin-trade](https://github.com/swarajdhondge/custom-skin-trade)
