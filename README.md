@@ -17,15 +17,37 @@ A dynamic Custom Game Skins Trading Platform built with Node.js backend and Expr
 - Express.js
 - MongoDB (Database)
 - Mongoose (Data Modeling)
-- Other relevant technologies...
+- Docker & Docker Compose (Containerization)
 
-## Installation
+## Installation and Setup
 
-1. Clone the repository: `git clone https://github.com/kaaaaate009/custom-skin-trade.git`
-2. Navigate to the project directory: `cd custom-skin-trade`
-3. Install dependencies: `npm i`
-4. Start the server: `nodemon app`
-5. Access the platform locally: `http://localhost:3000`
+The application and database have been containerized for ease of deployment. Follow the steps below to set up and run the application:
+
+#### Prerequisites
+Ensure you have Docker and Docker Compose installed on your system.
+
+#### Steps to Run the Application
+
+##### 1. Create a Docker Network:
+
+   `docker network create skin_app_net`
+
+##### 2.  Start Containers:
+
+   Use the following command to start both the application and database containers:
+
+   `docker-compose -f docker-compose.db.yml -f ../application/docker-compose.app.yaml up --build -d`
+
+   The command builds and starts the containers in detached mode.
+   Temporary data will be loaded into the database for initial testing.
+
+##### 3. Access the Application:
+
+   Once the containers are running, the application will be accessible at: `http://localhost:3000`
+
+##### 4. Additional Details:
+
+   Refer to the respective infrastructure folders (db and application) for more detailed configurations.
 
 ## Usage
 
@@ -52,4 +74,4 @@ This project is licensed under the [Apache-2.0 License](LICENSE).
 
 For any inquiries or suggestions, feel free to reach out to [SwarajDhondge](mailto:swarajdhondge@gmail.com).
 
-Project Link: [https://github.com/kaaaaate009/custom-skin-trade](https://github.com/kaaaaate009/custom-skin-trade)
+Project Link: [https://github.com/swarajdhondge/custom-skin-trade](https://github.com/kaaaaate009/custom-skin-trade)
