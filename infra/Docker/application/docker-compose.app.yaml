@@ -1,0 +1,20 @@
+services:
+  application:
+    container_name: skintradingapp
+    build:
+      context: ../../../
+      dockerfile: infra/Docker/application/Dockerfile
+    environment:
+      - MONGO_URL=mongodb://adm:admin123@mongo:27017/skintradeapp?authSource=admin
+      - SESSION_SECRET=ajfeirf90aeu9eroejfoefj
+      - PORT=3000
+    ports:
+      - 3000:3000
+    command: "node src/app.js"
+    networks:
+      - skin_app_net
+
+networks:
+  skin_app_net:
+    name: skin_app_net
+    external: true

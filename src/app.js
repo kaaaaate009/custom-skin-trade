@@ -14,29 +14,45 @@ const mainRoutes = require('../routes/mainRoutes');
 //create app
 const app = express();
 
-//configure app
-let port = 3000;
-let host = 'localhost';
+// Configure app
+let port = process.env.PORT || 3000; // Port from environment variable
+let host = '0.0.0.0'; // Bind to all interfaces
+let mongoUrl = process.env.MONGO_URL || 'mongodb://localhost:27017/skintradeapp';
+let sessionSecret = process.env.SESSION_SECRET || 'ajfeirf90aeu9eroejfoefj';
 app.set('view engine', 'ejs');
 
-mongoose.connect('mongodb://127.0.0.1:27017/milestone4',
-    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+// MongoDB Connection
+console.log(`Attempting to connect to MongoDB at: ${mongoUrl}`);
+mongoose.connect(mongoUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    authSource: 'admin'
+})
     .then(() => {
-        //start the server
-        app.listen(port, host, () => {
-            console.log('The server is running at port', port);
-        });
+        console.log('MongoDB connection established successfully.');
     })
-    .catch(err => console.log(err.message));
+    .catch(err => {
+        console.error('MongoDB connection error:', err.message);
+        process.exit(1); // Exit process if DB fails
+    });
 
-//mount middleware 
+// Start the server after MongoDB connection
+app.listen(port, host, () => {
+    console.log(`The server is running at http://${host}:${port}`);
+});
+
+// Mount middleware
 app.use(
     session({
-        secret: "ajfeirf90aeu9eroejfoefj",
+        secret: sessionSecret,
         resave: false,
         saveUninitialized: false,
-        store: new MongoStore({ mongoUrl: 'mongodb://127.0.0.1:27017/milestone4' }),
-        cookie: { maxAge: 60 * 60 * 1000 }
+        store: MongoStore.create({
+            mongoUrl: mongoUrl,
+            crypto: { secret: sessionSecret },
+            autoRemove: 'native'
+        }),
+        cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
     })
 );
 app.use(flash());
@@ -54,6 +70,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
 app.use(methodOverride('_method'));
 
+app.use((req, res, next) => {
+    console.log(`Request: ${req.method} ${req.url}`);
+    next();
+});
+
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: 'UP',
+        message: 'Server is running.',
+        mongo: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+    });
+});
+
+/*
+app.get('/', (req, res) => {
+    res.status(200).send('Server is up and running!');
+});
+*/
 
 app.use('/', mainRoutes);
 app.use('/about', mainRoutes);
