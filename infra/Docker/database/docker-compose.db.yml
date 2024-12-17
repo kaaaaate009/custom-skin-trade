@@ -1,0 +1,27 @@
+services:
+  mongo:
+    restart: always
+    image: mongo:5.0
+    container_name: mongo_db_con
+    volumes:
+      - mongo_data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    expose:
+      - 27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: adm
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+    networks:
+      - skin_app_net
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 6s
+      timeout: 3s
+      retries: 2
+
+volumes:
+  mongo_data:
+
+networks:
+  skin_app_net:
+    external: true
